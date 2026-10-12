@@ -1,0 +1,27 @@
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Byte-compiled / Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Données générées & Base SQLite
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Artefacts de modèles
+models/
+
+# Pytest / Couverture
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
