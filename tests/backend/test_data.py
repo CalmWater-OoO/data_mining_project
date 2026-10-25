@@ -42,7 +42,7 @@ def test_lire_table_analyse(base_de_test):
     # On exécute la vraie fonction 
     df_analyse = lire_table_analyse(base=fichier_db)
     
-    # Verifications : le GROUP BY du SQL doit avoir retiré le doublon 
+    # 3. Vérifications : le GROUP BY du SQL doit avoir retiré le doublon 
     assert len(df_analyse) == 2
     assert "imc" in df_analyse.columns
     assert "est_fumeur" in df_analyse.columns

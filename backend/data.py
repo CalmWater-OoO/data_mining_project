@@ -29,3 +29,4 @@ def lire_table_analyse(base: Path = BASE) -> pd.DataFrame:
     with closing(sqlite3.connect(base)) as con:
         return pd.read_sql(REQUETE_ANALYSE.read_text(encoding="utf-8"), con)
 
+
