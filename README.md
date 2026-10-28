@@ -4,7 +4,7 @@
 
 
 
-## Résultats (jeu de test, 335 demandes)
+## Résultats 
 
 | Stratégie tarifaire | Erreur moyenne d'estimation (MAE) |
 |---|---|
@@ -14,7 +14,7 @@
 
 - **R² de 0,87** sur le jeu de test, prouvant l'excellente fiabilité du modèle.
 - Modèle stable : l'erreur moyenne en validation croisée est de 2 599 $ ± 142 $.
-- La variable la plus déterminante est le **statut fumeur** suivie de **l'âge** (importance par permutation), ce qui valide la logique métier.
+- La variable la plus déterminante est le **statut fumeur** suivie de **l'âge**, ce qui valide la logique métier.
 - L'exploration K-means (3 segments) identifie parfaitement les "profils standards" (jeunes, IMC normal, frais ~6 400 $) face aux profils à haut risque.
 
 ## Lancer le projet
