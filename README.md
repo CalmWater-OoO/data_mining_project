@@ -19,14 +19,17 @@
 
 ## Lancer le projet
 
-Suivre les étapes ci-dessous dans l'ordre:
+Le projet a été réalisée avec la version 3.14.10 de python téléchargeable à l'URL : https://www.python.org/downloads/
+
+Pour lancer le projet vous devez suivre les étapes ci-dessous dans l'ordre:
 
 ```bash
-python -m venv .venv && source .venv/Scripts/activate   # Windows (Git Bash)   
+py --version # cette commande est censée renvoyer Python : 3.14.10 ou une version ultérieure
+py -m venv .venv && source .venv/Scripts/activate   # Windows (Git Bash)   
 pip install -r requirements.txt
-python -m backend.train                # SQLite + table d'analyse SQL + Entraînement 
-python -m pytest                       # Lance les tests avec pytest-cov (100% coverage)
-python -m streamlit run frontend/app.py
+py -m backend.train                # SQLite + table d'analyse SQL + Entraînement 
+py -m pytest                       # Lance les tests avec pytest-cov (100% coverage)
+py -m streamlit run frontend/app.py
 ```
 
 ## Architecture : backend et frontend séparés
