@@ -37,6 +37,6 @@ def metriques() -> dict:
 def profils_segments(k: int = 3) -> pd.DataFrame:
     """Profil moyen et charges moyennes de chaque segment K-means."""
     table = segmenter(lister_assures(), k)
-    profils = table.groupby("segment")[VARIABLES_SEGMENTATION + ["charges"]].mean().round(2)
+    profils = table.groupby("segment")[VARIABLES_SEGMENTATION].mean().round(2)
     profils.insert(0, "effectif", table["segment"].value_counts().sort_index())
     return profils.rename(columns={"charges": "charges_moyennes"})
