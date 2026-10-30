@@ -171,26 +171,47 @@ with onglet_segments:
 with onglet_modele:
 
     st.subheader("Performances du modèle")
-
+    st.write("Cet onglet permet d'évaluer la qualité des prédictions du modèle et d'identifier les variables qui contribuent le plus à ses estimations.")
+    
     colonne1, colonne2, colonne3 = st.columns(3)
+    with colonne1 : 
+        st.metric(
+            "R² sur le jeu de test",
+            f"{metriques['r2_modele']:.3f}",)
+        st.caption(
+            "Le R² mesure la capacité du modèle à expliquer les variations des charges médicales. Plus il est proche de 1, meilleur est le modèle.")
 
-    colonne1.metric(
-        "R² sur le jeu de test",
-        f"{metriques['r2_modele']:.3f}",
-    )
+    with colonne2 :
+        st.metric(
+            "MAE du modèle",
+            f"{metriques['mae_modele']:.2f} $",)
+        st.caption(
+            "La MAE (erreur absolue moyenne) représente l'écart moyen entre les charges réelles et les charges prédites. Plus elle est faible, plus les prédictions sont précises.")
 
-    colonne2.metric(
-        "MAE du modèle",
-        f"{metriques['mae_modele']:.2f} $",
-    )
+    with colonne3 : 
+        st.metric(
+            "MAE de référence",
+            f"{metriques['mae_baseline']:.2f} $",)
+        st.caption(
+            "La MAE de référence correspond à l'erreur obtenue avec un modèle de comparaison, qui permet d'évaluer l'intérêt de notre modèle.")
 
-    colonne3.metric(
-        "MAE de référence",
-        f"{metriques['mae_baseline']:.2f} $",
-    )
+    # Comparaison des performances
+    mae_modele = metriques["mae_modele"]
+    mae_baseline = metriques["mae_baseline"]
 
+    st.subheader("Comparaison avec le modèle de référence")
+    if mae_modele < mae_baseline:
+        st.success(
+            "Le modèle améliore les prédictions par rapport au modèle de référence.")
+    elif mae_modele > mae_baseline:
+        st.warning(
+            "Le modèle présente une erreur plus élevée que le modèle de référence.")
+    else:
+        st.info(
+            "Le modèle obtient les mêmes performances que le modèle de référence.")
+
+    
     st.subheader("Importance des variables")
-
     importances = pd.Series(
         metriques["importance_permutation"],
         name="Importance",
@@ -199,8 +220,7 @@ with onglet_modele:
     st.bar_chart(importances)
 
     st.caption(
-        "L'importance par permutation mesure la dégradation "
-        "des performances lorsque les valeurs d'une variable "
-        "sont mélangées. Une valeur élevée indique une variable "
-        "utile aux prédictions du modèle."
-    )
+        "Une valeur élevée indique que la variable joue un rôle important "
+        "dans la qualité des prédictions du modèle. Cette importance ne "
+        "traduit toutefois pas nécessairement un lien de causalité avec "
+        "le montant des charges médicales.")
