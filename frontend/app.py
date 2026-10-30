@@ -140,15 +140,13 @@ with onglet_prediction:
 
 
 
-
-
-
-
 # ONGLET 2 : SEGMENTATION
 with onglet_segments:
 
     st.subheader("Segmentation des assurés")
-
+    st.write("Cette analyse regroupe les assurés selon leur âge, leur IMC et leurs charges médicales, afin d'identifier et regrouper des profils similaires.")
+    st.metric("Nombre d'assurés analysés", len(table))
+    
     k = st.slider(
         "Nombre de segments",
         min_value=2,
@@ -158,7 +156,12 @@ with onglet_segments:
 
     try:
         profils = service.profils_segments(k)
+        st.subheader("Profil moyen de chaque segment")
         st.dataframe(profils, use_container_width=True)
+        st.subheader("Répartition des assurés par segment")
+        st.bar_chart(profils["effectif"])
+        st.subheader("Charges médicales moyennes par segment")
+        st.bar_chart(profils["charges_moyennes"])
 
     except (FileNotFoundError, KeyError) as erreur:
         st.error(f"Impossible de calculer les segments : {erreur}")
